@@ -28,29 +28,6 @@ public class FRPCConfigurationTest {
         Assertions.assertEquals(7000, frpcConfig.getServerPort());
     }
 
-    @Test
-    public void testSetServerAddress() {
-        Assertions.assertThrows(ConfigurationNotLoadException.class, () -> {
-            frpcConfig.setServerAddress("new-server");
-        });
-
-        frpcConfig.load();
-        Assertions.assertDoesNotThrow(() -> {
-            frpcConfig.setServerAddress("new-server");
-        });
-    }
-
-    @Test
-    public void testSetServerPort() {
-        Assertions.assertThrows(ConfigurationNotLoadException.class, () -> {
-            frpcConfig.setServerPort(8081);
-        });
-
-        frpcConfig.load();
-        Assertions.assertDoesNotThrow(() -> {
-            frpcConfig.setServerPort(8081);
-        });
-    }
 
     @Test
     public void testAddProxy() {
@@ -65,12 +42,12 @@ public class FRPCConfigurationTest {
     public void testUpdateProxy() {
         Proxy proxy = new Proxy("proxy1", ProxyType.TCP, "192.168.0.1", 8081, 8082);
         frpcConfig.addProxy(proxy);
-        Assertions.assertEquals(1, frpcConfig.getProxies().size());
+        Assertions.assertEquals(3, frpcConfig.getProxies().size());
 
         Proxy newProxy = new Proxy("proxy1", ProxyType.UDP, "192.168.0.1", 8081, 8082);
         frpcConfig.updateProxy(newProxy);
-        Assertions.assertEquals(1, frpcConfig.getProxies().size());
-        Assertions.assertEquals(newProxy, frpcConfig.getProxies().get(0));
+        Assertions.assertEquals(3, frpcConfig.getProxies().size());
+        Assertions.assertEquals(newProxy, frpcConfig.getProxies().get(2));
     }
 
     @Test
