@@ -10,6 +10,7 @@ stages:
 pre-work:
   cache:
     key: "settings"
+    policy: "pull"
     paths:
       - "./settings.xml"
   tags:
@@ -21,6 +22,7 @@ pre-work:
 maven-package:
   cache:
     key: "settings"
+    policy: "pull"
     paths:
       - "./settings.xml"
   tags:
