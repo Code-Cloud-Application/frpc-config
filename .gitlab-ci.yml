@@ -3,7 +3,9 @@ stages:
 
 
 maven-package: 
-    stage: "build"
-    image: "maven:3.6.3-openjdk-17"
-    script:
-        - "mvn clean verify"
+  tags:
+    - maven
+  stage: "build"
+  image: "maven:3.6.3-openjdk-17"
+  script:
+      - "mvn clean verify"
