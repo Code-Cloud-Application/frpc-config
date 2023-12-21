@@ -9,7 +9,7 @@ maven-package:
   tags:
     - maven
   stage: "build"
-  image: "cloud/maven"
+  image: "maven:3.9.6-amazoncorretto-21"
   script:
-      - "mvn clean verify"
+      - "mvn clean verify --settings ./settings.xml"
     
