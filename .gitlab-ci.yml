@@ -5,15 +5,42 @@ variables:
 
 stages:
   - "build"
+  - "test"
+  - "package"
+  - "verify"
 
 
-maven-package:
-  cache:
-    key: "settings"
-    policy: "pull"
+maven-compile:
   tags:
     - maven
   stage: "build"
+  image: "maven:3.9.6-amazoncorretto-21"
+  script:
+    - 'sed -i "s|central-repo|$MAVEN_CENTRAL_REPO_URL|g" ./settings.xml'
+    - "mvn clean compile --settings ./settings.xml"
+
+maven-test:
+  tags:
+    - maven
+  stage: "test"
+  image: "maven:3.9.6-amazoncorretto-21"
+  script:
+    - 'sed -i "s|central-repo|$MAVEN_CENTRAL_REPO_URL|g" ./settings.xml'
+    - "mvn clean test --settings ./settings.xml"
+
+maven-package:
+  tags:
+    - maven
+  stage: "package"
+  image: "maven:3.9.6-amazoncorretto-21"
+  script:
+    - 'sed -i "s|central-repo|$MAVEN_CENTRAL_REPO_URL|g" ./settings.xml'
+    - "mvn clean package --settings ./settings.xml"
+
+maven-verify:
+  tags:
+    - maven
+  stage: "verify"
   image: "maven:3.9.6-amazoncorretto-21"
   script:
     - 'sed -i "s|central-repo|$MAVEN_CENTRAL_REPO_URL|g" ./settings.xml'
