@@ -1,11 +1,28 @@
 
+variables:
+  MAVEN_CENTRAL_REPO_URL: "http://172.17.0.1:2024/repository/maven-central/"
 
 
 stages:
+  - "pre-setting"
   - "build"
 
+pre-work:
+  cache:
+    key: "settings"
+    paths:
+      - "./settings.xml"
+  tags:
+    - general
+  stage: "pre-setting"
+  script:
+    - 'sed -i "s|central-repo|$MAVEN_CENTRAL_REPO_URL|g" ./settings.xml'
 
-maven-package: 
+maven-package:
+  cache:
+    key: "settings"
+    paths:
+      - "./settings.xml"
   tags:
     - maven
   stage: "build"

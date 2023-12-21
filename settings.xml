@@ -168,7 +168,7 @@ under the License.
       <name>nexus</name>
       <id>nexus</id>
       <mirrorOf>central</mirrorOf>
-      <url>http://172.17.0.1:2024/repository/maven-central/</url>
+      <url>central-repo</url>
     </mirror>
   </mirrors>
 
