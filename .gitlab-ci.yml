@@ -3,6 +3,7 @@ variables:
   MAVEN_CENTRAL_REPO_URL: "http://172.17.0.1:2024/repository/maven-central/"
 
 
+
 stages:
   - "build"
   - "test"
@@ -11,6 +12,8 @@ stages:
 
 
 maven-compile:
+  only:
+    - master
   tags:
     - maven
   stage: "build"
@@ -29,6 +32,8 @@ maven-test:
     - "mvn clean test --settings ./settings.xml"
 
 maven-package:
+  only:
+  - master
   tags:
     - maven
   stage: "package"
@@ -38,6 +43,8 @@ maven-package:
     - "mvn clean package --settings ./settings.xml"
 
 maven-verify:
+  only:
+    - master
   tags:
     - maven
   stage: "verify"
